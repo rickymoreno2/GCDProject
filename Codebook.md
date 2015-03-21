@@ -32,7 +32,7 @@ as as the second column of the dataset. The column was labeled "Subject".
 
 ### Naming the original 561 columns:
 
-5. The file "features.txt" was used to create a character vector that was added to both 
+5. The file "features.txt" was used to create a character vector that was applied to both 
 the test and train data sets as the columns headers. For more information on these column 
 names please refer to the original "./UCI HAR Dataset/features_info.txt" file for more 
 information on these variable names (this file will be dowloaded and unzipped if you run 

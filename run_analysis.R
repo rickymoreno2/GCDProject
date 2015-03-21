@@ -57,9 +57,6 @@ train_column_labels <- as.vector(t(features_names[,2]))
 colnames(X_test.txt) <- test_column_labels
 colnames(X_train.txt) <- train_column_labels
 
-head(X_test.txt)
-head(X_train.txt)
-
 ## Step 5
 # This step will create a header called "Activity" for the y_test.txt and x_train.txt objects and
 # it will create a header colled "Subject" to the subject_test.txt and subject_train.txt objects
@@ -68,10 +65,6 @@ colnames(y_test.txt) <- "Activity"
 colnames(y_train.txt) <- "Activity"
 colnames(subject_test.txt) <- "Subject"
 colnames(subject_train.txt) <- "Subject"
-
-tail(y_test.txt, 10)
-tail(y_train.txt, 10)
-head(subject_test.txt, 10)
 
 ## Step 6
 # This step reads the activity_labels.txt file and create a R object called activity_names
@@ -97,17 +90,12 @@ train_activity_labels <- lapply(y_train.txt, FUN = function(foo) recode(foo, "1 
 
 train_activity_labels <- data.frame(train_activity_labels)
 
-head(test_activity_labels)
-head(train_activity_labels)
-tail(X_test.txt)
-
 ## Step 8
 # This step will merge the X_test.txt R and test_activity_labels R objects by 
 # adding test_activity_labels as a column and creating a new R object called test.txt
 
 test.txt <- cbind(X_test.txt, test_activity_labels)
 
-head(test.txt)
 
 ## Step 9 
 # This step is the same as step 7 but it will merge the X_train.txt R and train_activity_labels 
@@ -116,7 +104,6 @@ head(test.txt)
 
 train.txt <- cbind(X_train.txt, train_activity_labels)
 
-head(train.txt)
 
 ## Step 10
 # In this step a new column with be added to test.txt using the data from subject_test.txt and
@@ -136,11 +123,49 @@ tidy_data <- rbind(tidy_test, tidy_train)
 
 ## Step 12
 # In this step we will use dplyr functions to subset the data by means and standard deviation,
-# as requested in item 2 of the instructions. The subsetted data will be called subset_tidy
+# as requested in item 2 of the instructions. It will keep the Activity and Subject columns to 
+# be able to identify and group observations. The subsetted data will be called subset_tidy
 
-dim(tidy_data)
-subset_tidy <- select(tidy_data,  contains(mean, ignore.case = TRUE))
+valid_column_names <- make.names(names=names(tidy_data), unique=TRUE, allow_ = TRUE)
+names(tidy_data) <- valid_column_names
 
-head(subset_tidy)
+subset_mean <- select(tidy_data, contains("mean"))
+
+subset_std <- select(tidy_data, contains("std"))
+
+subset_id <- select(tidy_data, Subject, Activity)
+
+subset_tidy <- cbind(subset_id, subset_mean, subset_std)
+
+tail(subset_tidy)
+
+## Step 13
+
+mydata_arranged <-arrange(subset_tidy, Subject, Activity)
+
+head(mydata_arranged)
+
+## Step 14
+# this is the fucking answer!!!
+
+
+by_subject_act <-  mydata_arranged %>% group_by(Subject,Activity)
+
+head(by_subject_act)
+
+project_tidy <- by_subject_act %>% summarise_each(funs(mean))
+
+# Step 15
+
+my_tidy_data <- write.table(project_tidy, 
+                            file = "/Users/Ricky/datasciencecoursera/Getting and cleaning data/GCDProject/Project table/my_tidy_data.txt",
+                            row.name=FALSE)
+
+
+dim(project_tidy)
+
+
+
+
 
 

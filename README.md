@@ -74,14 +74,29 @@ names and appropiate measurement labels.
 
 # Step 12
 
-- In this step we will use dplyr functions to subset the data by means and standard 
-deviation, as requested in item 2 of the instructions. It will keep the Activity and 
+- In this step we will use dplyr a series of functions to subset the data by means and 
+standard deviation, as requested in item 2 of the instructions. It will keep the Activity and 
 Subject columns to be able to identify and group observations. The subsetted data will be 
 called subset_tidy.
+-This step will also make sure column names are unique using the make.names() function 
+with unique parameter set to true
 
 # Step 13
 
+-This step will use dplyr functions to arrange the data by subject first and then by 
+activity and then w
 
-# Step 15
+# Step 14
 
+- This step will group first the data by Subject and then by Activity. 
 
+- Then it will create an object called by_subject_act and will use the summarize function
+to calculate the mean for each activity for each subject. The R object created is called 
+project_tidy
+
+# Step 15 
+
+- This the final step that will use the function write.table() with row.name=FALSE to 
+create a text file called my_tidy_data.txt 
+_ In this step is important that you set up your own path to a file in your computer 
+where you want to write the tidy data set. 

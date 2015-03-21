@@ -47,4 +47,5 @@ and Subject) were removed from the dataset.
 7. Finally, as per the assignment instructions, the individual observations were transformed
 to calculate the average of each variable for each subject for each activity. 
 
-8. The final result is a table with 88 variables and 180 rows (30 subjects x 6 Activities). 
+8. The final result is a table with 88 variables and 180 rows (if we don't count the 
+header - 30 subjects x 6 Activities). 

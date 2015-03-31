@@ -79,12 +79,12 @@ standard deviation, as requested in item 2 of the instructions. It will keep the
 Subject columns to be able to identify and group observations. The subsetted data will be 
 called subset_tidy.
 -This step will also make sure column names are unique using the make.names() function 
-with unique parameter set to true
+with unique parameter set to true.
 
 # Step 13
 
 -This step will use dplyr functions to arrange the data by subject first and then by 
-activity and then w
+activity 
 
 # Step 14
 
